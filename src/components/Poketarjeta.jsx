@@ -6,7 +6,6 @@ import { Badge, Card, CardBody, CardFooter, CardImg, Col } from 'reactstrap';
 const Poketarjeta = (params) => {
   const [pokemon, setPokemon] = useState([]);
   const [imagen,setImagen] = useState('');
-  console.log(pokemon)
 
   useEffect( () => {
     getPokemon()
@@ -28,7 +27,7 @@ const Poketarjeta = (params) => {
   }
   return (
     <Col sm = '4' lg='3' className='mb-3'>
-      <Card className={'shadow border-4 border-warning'}>
+      <Card className={'card-hover shadow border-4 border-warning'}>
         <CardImg src= {imagen} height='150' width='150'className='p-2'/>
         <CardBody className='text-center'>
           <Badge pill color= 'danger'># {pokemon.id}</Badge>
