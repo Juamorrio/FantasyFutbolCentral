@@ -33,7 +33,6 @@ const Index = () => {
             setPokemons(respuesta)
             setListado(respuesta)
             setTotal(200)
-            console.log(pokemons)
             
         })
     }
@@ -78,7 +77,7 @@ const Index = () => {
         <Col>
           <InputGroup className='mt-3 mb-3'>
           <InputGroupText><i className='fa-solid fa-search'></i></InputGroupText>
-          <Input value={filtro} onChange={(e) => {setFiltro(e.target.value)}} onKeyUpCapture={buscar} placeholder='Buscar pokemon'></Input>
+          <Input value={filtro} onChange={(e) => {setFiltro(e.target.value)}} onKeyUpCapture={buscar} placeholder='Buscar Jugador'></Input>
           </InputGroup>
         </Col>
       </Row>
