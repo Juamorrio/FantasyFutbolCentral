@@ -1,12 +1,14 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
+import { useParams } from 'react-router-dom';
 import { Col, Container, Input, InputGroup, InputGroupText, Row } from 'reactstrap';
 import Poketarjeta from '../components/poketarjeta';
 
 
 
 const Index = () => {
+    const {Equipo}  = useParams();
     const [pokemons, setPokemons] = useState([]);
     const [allPokemons, setAllPokemons] = useState([]);
     const [listado, setListado] = useState([]);
@@ -22,14 +24,9 @@ const Index = () => {
     )
 
     const getPokemons = async(o) => {
-        //const liga = 'https://pokeapi.co/api/v2/pokemon?limit='+limit+'&offset='+o
         const liga2 = 'https://api-fantasy.llt-services.com/api/v4/players?x-lang=es'
         axios.get(liga2).then( async(response) => {
             const respuesta = response.data;
-            //setPokemons(respuesta)
-            //setPokemons(respuesta.results)
-            //setListado(respuesta.results)
-            //setTotal(respuesta.count)
             setPokemons(respuesta)
             setListado(respuesta)
             setTotal(200)
@@ -38,12 +35,9 @@ const Index = () => {
     }
 
     const getAllPokemons = async() => {
-      //const liga = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0'
       const liga2 = 'https://api-fantasy.llt-services.com/api/v4/players?x-lang=es'
       axios.get(liga2).then( async(response) => {
           const respuesta = response.data;
-          //setPokemons(respuesta)
-          //setAllPokemons(respuesta.results)
           setAllPokemons(respuesta)
       })
   }
