@@ -5,12 +5,11 @@ import { Card, CardBody, CardText, Col, Container, Row } from 'reactstrap'
 const Detalle = () => {
   const {id}  = useParams();
   const [pokemon, setPokemon] = useState([]);
-  const [valor, setValor] = ([]);
+  const [valor, setValor] = useState([]);
   const [estado, setEstado] = ([]);
   const [puntosPromedio, setPuntosPromedio] = ([])
   const [imagen,setImagen] = useState([]);
   const [escudo, setEscudo] = useState('');
-  console.log(pokemon)
 
   useEffect( () => {
     getPokemon()
@@ -29,7 +28,7 @@ const getPokemon = async() =>{
     }
 
     setEscudo(respuesta.team.badgeColor)
-
+    setValor(respuesta.marketValue.toLocaleString('es-ES'))
   })
 }
 
@@ -49,7 +48,7 @@ const getPokemon = async() =>{
               <Col md='6'>
                 <CardText className='h1 text-capitaliza'>{pokemon.nickname}</CardText>
                 <CardText className='fs-3'>
-                Precio: <b>{pokemon.marketValue}M</b></CardText>
+                Precio: <b>{valor}M</b></CardText>
                 <CardText className='fs-3'>
                 Puntos Totales: <b>{pokemon.points}</b></CardText>
                 <CardText className='fs-5'>

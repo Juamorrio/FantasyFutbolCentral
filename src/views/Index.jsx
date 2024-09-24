@@ -9,6 +9,7 @@ import Poketarjeta from '../components/poketarjeta';
 
 const Index = () => {
     const {Equipo}  = useParams();
+    console.log(Equipo)
     const [pokemons, setPokemons] = useState([]);
     const [allPokemons, setAllPokemons] = useState([]);
     const [listado, setListado] = useState([]);
@@ -66,7 +67,7 @@ const Index = () => {
     setOffset(p);
   }
   return (
-    <Container className='shadow bg-danger mt-3' >
+    <Container className='contenedorJugadores' >
       <Row>
         <Col>
           <InputGroup className='mt-3 mb-3'>
@@ -76,9 +77,13 @@ const Index = () => {
         </Col>
       </Row>
       <Row>
-        { listado.map((pok,i) => (
-          <Poketarjeta poke={pok} key={i}></Poketarjeta>
-        ))}
+        { listado.map((pok,i) => {
+          if (pok.team.name == Equipo){
+            return (<Poketarjeta poke={pok} key={i}></Poketarjeta>)
+          }
+        }
+          
+        )}
         <PaginationControl last={true} limit={limit} total={total} page={offset}
         changePage={page=>goPage(page)}/>
       </Row>

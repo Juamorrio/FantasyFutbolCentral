@@ -1,5 +1,5 @@
 .fondo{
-    background-image: url('../public/img/fondo.jpg');
+    background: #628B48;
     background-size: 100%;
 }
 
@@ -10,3 +10,19 @@
 .card-hover:hover{
     transform: translateY(-8px) scale(1.01);
 }
+
+.contenedorJugadores{
+  /* Equivalente a `shadow` de Bootstrap (una sombra simple) */
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+  
+  /* Equivalente a `bg-danger` (fondo rojo) */
+  background-color: #001021;
+  
+  /* Equivalente a `mt-3` (margen superior de 1 rem) */
+  margin-top: 1rem;
+
+}
+
+/*  001021
+    628B48
+    F1F2EB */

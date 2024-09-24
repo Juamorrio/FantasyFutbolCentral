@@ -6,13 +6,13 @@ import { Badge, Card, CardBody, CardFooter, CardImg, Col } from 'reactstrap';
 const Poketarjeta = (params) => {
   const [pokemon, setPokemon] = useState([]);
   const [imagen,setImagen] = useState('');
+  
 
   useEffect( () => {
     getPokemon()
 }, [])
 
   const getPokemon = async() => {
-    //const liga = params.poke.url;
     const liga = 'https://api-fantasy.llt-services.com/api/v3/player/'+params.poke.id+'?x-lang=es'
     axios.get(liga).then( async(response)=>{
       const respuesta = response.data;

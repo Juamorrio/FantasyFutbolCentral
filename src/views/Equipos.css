@@ -1,0 +1,16 @@
+.equipos{
+    display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
+      gap: 10px; /* Espacio entre las imágenes */
+    background: #001021;
+}
+
+.btn {
+    width: fit-content;
+    margin: auto;
+}
+
+.equipos img {
+    width: 160px;
+    height: 160px;
+}
