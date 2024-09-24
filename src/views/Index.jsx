@@ -3,43 +3,43 @@ import React, { useEffect, useState } from 'react';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { useParams } from 'react-router-dom';
 import { Col, Container, Input, InputGroup, InputGroupText, Row } from 'reactstrap';
-import Poketarjeta from '../components/poketarjeta';
+import TarjetaJugador from '../components/TarjetaJugador';
 
 
 
 const Index = () => {
     const {Equipo}  = useParams();
     console.log(Equipo)
-    const [pokemons, setPokemons] = useState([]);
-    const [allPokemons, setAllPokemons] = useState([]);
+    const [Jugadores, setJugadores] = useState([]);
+    const [allJugadores, setAllJugadores] = useState([]);
     const [listado, setListado] = useState([]);
     const [filtro, setFiltro] = useState('');
     const [offset, setOffset] = useState(0); 
     const [limit, setLimit] = useState(20);
     const [total, setTotal] = useState(0);
     useEffect( () => {
-        getPokemons(offset)
-        getAllPokemons()
+        getJugadores(offset)
+        getAllJugadores()
     }, []
 
     )
 
-    const getPokemons = async(o) => {
+    const getJugadores = async(o) => {
         const liga2 = 'https://api-fantasy.llt-services.com/api/v4/players?x-lang=es'
         axios.get(liga2).then( async(response) => {
             const respuesta = response.data;
-            setPokemons(respuesta)
+            setJugadores(respuesta)
             setListado(respuesta)
             setTotal(200)
             
         })
     }
 
-    const getAllPokemons = async() => {
+    const getAllJugadores = async() => {
       const liga2 = 'https://api-fantasy.llt-services.com/api/v4/players?x-lang=es'
       axios.get(liga2).then( async(response) => {
           const respuesta = response.data;
-          setAllPokemons(respuesta)
+          setAllJugadores(respuesta)
       })
   }
 
@@ -48,14 +48,14 @@ const Index = () => {
       if(filtro.trim() != ''){
         setListado([]);
         setTimeout( () => {
-          setListado(allPokemons.filter(p => p.nickname.includes(filtro)))
+          setListado(allJugadores.filter(p => p.nickname.includes(filtro)))
         }, 100)
       }
       
     } else if(filtro.trim() == '') {
       setListado([]);
       setTimeout( () => {
-        setListado(pokemons);
+        setListado(Jugadores);
       }, 100)
       
     }
@@ -63,7 +63,7 @@ const Index = () => {
 
   const goPage = async(p) => {
     setListado([]);
-    await getPokemons( (p==1) ? 0 : ((p-1)*20));
+    await getJugadores( (p==1) ? 0 : ((p-1)*20));
     setOffset(p);
   }
   return (
@@ -79,7 +79,7 @@ const Index = () => {
       <Row>
         { listado.map((pok,i) => {
           if (pok.team.name == Equipo){
-            return (<Poketarjeta poke={pok} key={i}></Poketarjeta>)
+            return (<TarjetaJugador poke={pok} key={i}></TarjetaJugador>)
           }
         }
           

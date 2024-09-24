@@ -9,11 +9,21 @@ import ALA from '/img/Deportivo Alavés.png';
 import BAR from '/img/FC Barcelona.png';
 import GET from '/img/Getafe CF.png';
 import GIR from '/img/Girona FC.png';
+import RAY from '/img/Rayo Vallecano.png';
+import CEL from '/img/RC Celta.png';
+import ESP from '/img/RCD Espanyol de Barcelona.png';
+import MAL from '/img/RCD Mallorca.png';
 import BET from '/img/Real Betis.png';
+import MAD from '/img/Real Madrid.png';
+import RSO from '/img/Real Sociedad.png';
+import VLL from '/img/Real Valladolid CF.png';
+import SVF from '/img/Sevilla FC.png';
+import UDP from '/img/UD Las Palmas.png';
+import VAL from '/img/Valencia CF.png';
+import VIL from '/img/Villarreal CF.png';
 
 
-
-const images = [ALA, ATH, ATM, OSA, BET, LEG, BAR, GET, GIR];
+const images = [ALA, ATH, ATM, OSA, BET, LEG, BAR, GET, GIR, RAY, ESP, MAL, MAD, RSO, VLL, SVF, UDP, VAL, VIL, CEL];
 
 const ImageButtons = () => {
   return (
