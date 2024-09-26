@@ -54,6 +54,8 @@ const BarChart = ({id}) => {
 
   // Opciones de configuración
   const options = {
+    /* width: 100, 
+    height: 100,  */
     responsive: true,
     plugins: {
       legend: {

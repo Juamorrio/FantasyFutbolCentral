@@ -5,7 +5,7 @@
 .contenedorJugador {
     position: absolute;
     gap: 20px;
-    width: 400px;
+    width: 40%;
     height: 800px;
     background-color: #F1F2EB;
     border-radius: 30px;

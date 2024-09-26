@@ -12,13 +12,11 @@ const Detalle = () => {
   const [puntosPromedio, setPuntosPromedio] = useState([]);
   const [imagen,setImagen] = useState([]);
   const [valorMercado, setValorMercado] = useState([]);
-  
 
 
   useEffect( () => {
     getJugador();
     getValorMinMax();
-    console.log(valorMercado)
 }, [])
 
 const getJugador = async() =>{
@@ -40,12 +38,29 @@ const getJugador = async() =>{
 const getValorMinMax = async() =>{
   const valores = await getValorMercado(id);
   const nuevosValorMercado = []
-  valores.forEach(element => { nuevosValorMercado.push(element.marketValue);
+  valores.forEach(element => { nuevosValorMercado.push(element.marketValue.toLocaleString('es-ES'));
         })
+  nuevosValorMercado.sort((a,b) => a-b);
   
   setValorMercado(nuevosValorMercado);
-  
 }
+
+const JugadorStatus = () => {
+  let mensajeEstado;
+  
+  if (Jugador.playerStatus === 'injured') {
+    mensajeEstado = <h4 style={{color: 'red'}}>LESIONADO</h4>;
+  } else if(Jugador.playerStatus === 'ok') {
+    mensajeEstado = <h4 style={{color: 'green'}}>ALINEABLE</h4>;
+  } else {
+    mensajeEstado = <h4 style={{color: '#ffc300'}}>DUDA</h4>;
+  }
+return mensajeEstado;
+};
+  
+
+  
+
 
   return (
   <div className='contenedor'>
@@ -58,8 +73,9 @@ const getValorMinMax = async() =>{
         <h4>Valor: {valor} M</h4>
         <h5>Puntos/Partido:  {puntosPromedio}</h5>
         <BarChart id={Jugador.id} />
-        <h5>Valor maximo:  {Math.max(valorMercado)}</h5>
-        <h5>Valor minimo:  </h5>
+        <h5>Valor maximo:  {valorMercado[0]} M</h5>
+        <h5>Valor minimo:  {valorMercado[valorMercado.length-1]} M</h5>
+        <JugadorStatus/>
       </div>
     </div>
   </div>
