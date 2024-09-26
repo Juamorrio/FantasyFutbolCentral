@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import BarChart from '../components/Grafico';
 import './Detalle.css';
+
 const Detalle = () => {
   const {id}  = useParams();
   const [Jugador, setJugador] = useState([]);
@@ -16,8 +18,6 @@ const Detalle = () => {
     getJugador();
    
 }, [])
-
-console.log(Jugador)
 
 const getJugador = async() =>{
   const liga = 'https://api-fantasy.llt-services.com/api/v3/player/'+id;
@@ -49,6 +49,8 @@ const getJugador = async() =>{
         <h1 className='nombre'>{Jugador.nickname}</h1>
         <h4>Valor: {valor}</h4>
         <h5>Puntos/Partido:  {puntosPromedio}</h5>
+        <h5>Juan los endpoints</h5>
+        <BarChart id={Jugador.id} />
       </div>
     </div>
   </div>
