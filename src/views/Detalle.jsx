@@ -8,15 +8,12 @@ const Detalle = () => {
   const {id}  = useParams();
   const [Jugador, setJugador] = useState([]);
   const [valor, setValor] = useState([]);
-  const [titularidad, setTitularidad] = useState(0);
   const [puntosPromedio, setPuntosPromedio] = useState([]);
-  const [puntosTotales, setPuntosTotales] = useState([]);
   const [imagen,setImagen] = useState([]);
   const [escudo, setEscudo] = useState('');
 
   useEffect( () => {
     getJugador();
-   
 }, [])
 
 const getJugador = async() =>{
@@ -34,10 +31,7 @@ const getJugador = async() =>{
     setValor(respuesta.marketValue.toLocaleString('es-ES'))
     setPuntosPromedio(respuesta.averagePoints.toString().substring(0, 5))
   })
-
-
 }
-
 
   return (
   <div className='contenedor'>
@@ -49,7 +43,6 @@ const getJugador = async() =>{
         <h1 className='nombre'>{Jugador.nickname}</h1>
         <h4>Valor: {valor}</h4>
         <h5>Puntos/Partido:  {puntosPromedio}</h5>
-        <h5>Juan los endpoints</h5>
         <BarChart id={Jugador.id} />
       </div>
     </div>
@@ -57,4 +50,4 @@ const getJugador = async() =>{
   )
 }
 
-export default Detalle
+export default Detalle  

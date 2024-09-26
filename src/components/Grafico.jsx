@@ -1,37 +1,39 @@
-import axios from 'axios';
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
+import getValorMercado from '../api/FantasyEndPoints';
 
-// Necesitas registrar los componentes de Chart.js
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const BarChart = ({id}) => {
-    // Datos para el gráfico
-    const [Jugador, setJugador] = useState([]);
     const [fechas, setFechas] = useState([]);
     const [valorMercado, setValorMercado] = useState([]);
-    console.log(id)
-
+    const [ idJugador, setIdJugador] = useState(null);
+    
+    
     useEffect( () => {
-        getJugador({id})
-    }, [])
+      if (id) {
+        getIdJugador(id); 
+        }
+      }, [id]); 
+      const getIdJugador = (id) => {
+        setIdJugador(id); // 
+      };
 
-    const getJugador = async({id}) => {
-        const liga = 'https://api-fantasy.llt-services.com/api/v3/player/'+id+'/market-value?x-lang=es'
-        await axios.get(liga).then( async(response)=>{
-        const respuesta = response.data;
-        setJugador(respuesta);
-        })
-        
-        const valorMercado = [];
-        const fechas = [];
+  
+    useEffect(() => {
+      if (idJugador) {
+          getJugador(idJugador); 
+      }
+  }, [idJugador]); 
 
-        Jugador.forEach(element => { valorMercado .push(element.marketValue);
-            fechas.push(new Date(element.date).getDate()+'/'+new Date(element.date).getMonth())
 
-        setFechas(fechas);
-        setValorMercado(valorMercado);
+    const getJugador = async(idJugador) => {
+      const liga = await getValorMercado(idJugador);
+      liga.forEach(element => { valorMercado.push(element.marketValue);
+      fechas.push(new Date(element.date).getDate()+'/'+new Date(element.date).getMonth())
+      setFechas(fechas);
+      setValorMercado(valorMercado);
 
         })
 
@@ -42,7 +44,7 @@ const BarChart = ({id}) => {
     labels: fechas,
     datasets: [
         {
-          label: 'Ventas en USD',
+          label: 'Valor de Mercado',
           data: valorMercado,
           backgroundColor: '#538d22',
         },
