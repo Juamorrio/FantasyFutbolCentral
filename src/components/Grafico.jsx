@@ -17,7 +17,7 @@ const BarChart = ({id}) => {
         }
       }, [id]); 
       const getIdJugador = (id) => {
-        setIdJugador(id); // 
+        setIdJugador(id);  
       };
 
   
@@ -29,14 +29,15 @@ const BarChart = ({id}) => {
 
 
     const getJugador = async(idJugador) => {
+      console.log(idJugador)
       const liga = await getValorMercado(idJugador);
-      liga.forEach(element => { valorMercado.push(element.marketValue);
-      fechas.push(new Date(element.date).getDate()+'/'+new Date(element.date).getMonth())
-      setFechas(fechas);
-      setValorMercado(valorMercado);
-
+      const nuevosValorMercado = []
+      const nuevasFechas = []
+      liga.forEach(element => { nuevosValorMercado.push(element.marketValue);
+        nuevasFechas.push(new Date(element.date).getDate()+'/'+new Date(element.date).getMonth())
         })
-
+      setFechas(nuevasFechas);
+      setValorMercado(nuevosValorMercado );
     }
     
 
@@ -60,7 +61,7 @@ const BarChart = ({id}) => {
       },
       title: {
         display: true,
-        text: 'Ventas Mensuales',
+        text: 'Evolución de valor',
       },
     },
   };
