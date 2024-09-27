@@ -3,15 +3,17 @@ import './App.css'
 import Detalle from './views/Detalle'
 import Equipos from './views/Equipos'
 import Index from './views/Index'
+import Inicio from './views/Inicio'
 
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Equipos/>}/>
+        <Route path='/' element={<Inicio/>}/>
+        <Route path='/Equipos' element={<Equipos/>}/>
         <Route path='/Jugador/:id' element={<Detalle/>}/>
-        <Route path='/indice/:Equipo' element={<Index/>}/>
+        <Route path='/Indice/:Equipo' element={<Index/>}/>
       </Routes>
     </BrowserRouter>
   )

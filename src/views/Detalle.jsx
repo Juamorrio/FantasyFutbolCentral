@@ -17,6 +17,7 @@ const Detalle = () => {
   useEffect( () => {
     getJugador();
     getValorMinMax();
+    console.log(valorMercado)
 }, [])
 
 const getJugador = async() =>{
@@ -38,11 +39,14 @@ const getJugador = async() =>{
 const getValorMinMax = async() =>{
   const valores = await getValorMercado(id);
   const nuevosValorMercado = []
-  valores.forEach(element => { nuevosValorMercado.push(element.marketValue.toLocaleString('es-ES'));
+  const ValorMercadoFormateado = []
+  valores.forEach(element => { nuevosValorMercado.push(element.marketValue);
         })
+        
   nuevosValorMercado.sort((a,b) => a-b);
-  
-  setValorMercado(nuevosValorMercado);
+  nuevosValorMercado.forEach(element => { ValorMercadoFormateado.push(element.toLocaleString('es-ES'));
+  })
+  setValorMercado(ValorMercadoFormateado);
 }
 
 const JugadorStatus = () => {
@@ -73,8 +77,18 @@ return mensajeEstado;
         <h4>Valor: {valor} M</h4>
         <h5>Puntos/Partido:  {puntosPromedio}</h5>
         <BarChart id={Jugador.id} />
-        <h5>Valor maximo:  {valorMercado[0]} M</h5>
-        <h5>Valor minimo:  {valorMercado[valorMercado.length-1]} M</h5>
+        {
+      valorMercado[0] > valorMercado[valorMercado.length - 1] ? (
+        <>
+          
+        </>
+      ) : (
+        <>
+          <h5>Valor maximo:  {valorMercado[valorMercado.length - 1]} M</h5>
+          <h5>Valor minimo:  {valorMercado[0]} M</h5>
+        </>
+      )
+        }
         <JugadorStatus/>
       </div>
     </div>

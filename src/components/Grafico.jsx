@@ -47,7 +47,7 @@ const BarChart = ({id}) => {
         {
           label: 'Valor de Mercado',
           data: valorMercado,
-          backgroundColor: '#538d22',
+          backgroundColor: '#4F518C',
         },
       ],
   };
