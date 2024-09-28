@@ -1,7 +1,7 @@
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import getValorMercado from '../api/FantasyEndPoints';
+import { getValorMercado } from '../api/FantasyEndPoints';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -29,7 +29,6 @@ const BarChart = ({id}) => {
 
 
     const getJugador = async(idJugador) => {
-      console.log(idJugador)
       const liga = await getValorMercado(idJugador);
       const nuevosValorMercado = []
       const nuevasFechas = []

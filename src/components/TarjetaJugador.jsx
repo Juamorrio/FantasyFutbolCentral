@@ -13,7 +13,7 @@ const TarjetaJugador = (params) => {
 }, [])
 
   const getJugador = async() => {
-    const liga = 'https://api-fantasy.llt-services.com/api/v3/player/'+params.poke.id+'?x-lang=es'
+    const liga = `/api/player/${params.poke.id}`
     axios.get(liga).then( async(response)=>{
       const respuesta = response.data;
       console.log(respuesta)

@@ -1,7 +1,6 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import getValorMercado from '../api/FantasyEndPoints';
+import { getStats, getValorMercado } from '../api/FantasyEndPoints';
 import BarChart from '../components/Grafico';
 import './Detalle.css';
 
@@ -17,36 +16,47 @@ const Detalle = () => {
   useEffect( () => {
     getJugador();
     getValorMinMax();
-    console.log(valorMercado)
+    
 }, [])
 
 const getJugador = async() =>{
-  const liga = 'https://api-fantasy.llt-services.com/api/v3/player/'+id;
-  await axios.get(liga).then((response) => {
-    const respuesta = response.data;
+  try {
+    const respuesta = await getStats(id); // Obtiene directamente la respuesta
     setJugador(respuesta);
-    if (respuesta.images.transparent['256x256'] != null) {
-      setImagen(respuesta.images.transparent['256x256'])
+
+    // Manejo de imágenes
+    if (respuesta.images && respuesta.images.transparent && respuesta.images.transparent['256x256']) {
+      setImagen(respuesta.images.transparent['256x256']);
     } else { 
-      setImagen(respuesta.images.transparent['256x256'])
+      setImagen('default_image.png'); // Usa una imagen por defecto si no hay
     }
 
-    setValor(respuesta.marketValue.toLocaleString('es-ES'))
-    setPuntosPromedio(respuesta.averagePoints.toString().substring(0, 5))
-  })
+    // Manejo de valores
+    setValor(respuesta.marketValue.toLocaleString('es-ES'));
+    setPuntosPromedio(respuesta.averagePoints.toString().substring(0, 5));
+  } catch (error) {
+    console.error('Error al obtener el jugador:', error.message); // Manejo de errores
+  }
 }
 
 const getValorMinMax = async() =>{
-  const valores = await getValorMercado(id);
-  const nuevosValorMercado = []
-  const ValorMercadoFormateado = []
-  valores.forEach(element => { nuevosValorMercado.push(element.marketValue);
-        })
-        
-  nuevosValorMercado.sort((a,b) => a-b);
-  nuevosValorMercado.forEach(element => { ValorMercadoFormateado.push(element.toLocaleString('es-ES'));
-  })
-  setValorMercado(ValorMercadoFormateado);
+  try {
+    const valores = await getValorMercado(id);
+    
+    // Asegúrate de que 'valores' es un arreglo
+    if (Array.isArray(valores)) {
+      const nuevosValorMercado = valores.map(element => element.marketValue); // Extrae el marketValue
+      nuevosValorMercado.sort((a, b) => a - b); // Ordena los valores
+
+      // Formatear los valores
+      const ValorMercadoFormateado = nuevosValorMercado.map(element => element.toLocaleString('es-ES'));
+      setValorMercado(ValorMercadoFormateado);
+    } else {
+      console.error('La respuesta no es un arreglo:', valores);
+    }
+  } catch (error) {
+    console.error('Error al obtener el valor de mercado:', error.message); // Manejo de errores
+  }
 }
 
 const JugadorStatus = () => {

@@ -25,7 +25,7 @@ const Index = () => {
     )
 
     const getJugadores = async(o) => {
-        const liga2 = 'https://api-fantasy.llt-services.com/api/v4/players?x-lang=es'
+        const liga2 = '/api/players'
         axios.get(liga2).then( async(response) => {
             const respuesta = response.data;
             setJugadores(respuesta)
@@ -36,7 +36,7 @@ const Index = () => {
     }
 
     const getAllJugadores = async() => {
-      const liga2 = 'https://api-fantasy.llt-services.com/api/v4/players?x-lang=es'
+      const liga2 = '/api/players'
       axios.get(liga2).then( async(response) => {
           const respuesta = response.data;
           setAllJugadores(respuesta)
