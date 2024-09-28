@@ -23,5 +23,17 @@ export const getValorMercado = async (id) => {
         })
     })
   }
-  export default {getValorMercado, getStats};
+
+  export const getPlayers = async () => {
+    return new Promise(function (resolve, reject) {
+      axios.get(`https://api-fantasy.llt-services.com/api/v3/players`)
+        .then(response => {
+          resolve(response.data)
+        })
+        .catch(error => {
+          console.log('No se puede representar la grafica')
+        })
+    })
+  }
+  export default {getValorMercado, getStats, getPlayers};
 

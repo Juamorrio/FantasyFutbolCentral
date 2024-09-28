@@ -1,8 +1,8 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { useParams } from 'react-router-dom';
 import { Col, Container, Input, InputGroup, InputGroupText, Row } from 'reactstrap';
+import { getPlayers } from '../api/FantasyEndPoints';
 import TarjetaJugador from '../components/TarjetaJugador';
 
 
@@ -25,22 +25,30 @@ const Index = () => {
     )
 
     const getJugadores = async(o) => {
-        const liga2 = '/api/players'
-        axios.get(liga2).then( async(response) => {
-            const respuesta = response.data;
-            setJugadores(respuesta)
-            setListado(respuesta)
-            setTotal(200)
-            
-        })
+      try {
+        const liga = await getPlayers(); // Asegúrate de que esta función devuelva la URL correcta
+        const respuesta = liga; // Accede a los datos de la respuesta
+    
+        // Actualiza los estados
+        setJugadores(respuesta);
+        setListado(respuesta);
+        setTotal(200);
+      } catch (error) {
+        console.error('Error al obtener los jugadores:', error.message); // Manejo de errores
+      }
     }
 
     const getAllJugadores = async() => {
-      const liga2 = '/api/players'
-      axios.get(liga2).then( async(response) => {
-          const respuesta = response.data;
-          setAllJugadores(respuesta)
-      })
+      try {
+        const liga = await getPlayers(); // Asegúrate de que esta función devuelva la URL correcta
+        const respuesta = liga; // Accede a los datos de la respuesta
+    
+        // Actualiza los estados
+        setAllJugadores(respuesta);
+        
+      } catch (error) {
+        console.error('Error al obtener los jugadores:', error.message); // Manejo de errores
+      }
   }
 
   const buscar = async(e) => {

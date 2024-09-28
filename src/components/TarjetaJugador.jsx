@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { getStats } from '../api/FantasyEndPoints';
 import './Cartas.css';
 
 const TarjetaJugador = (params) => {
@@ -13,9 +13,9 @@ const TarjetaJugador = (params) => {
 }, [])
 
   const getJugador = async() => {
-    const liga = `/api/player/${params.poke.id}`
-    axios.get(liga).then( async(response)=>{
-      const respuesta = response.data;
+    const liga = await getStats(params.poke.id)
+    
+      const respuesta = liga;
       console.log(respuesta)
       setJugador(respuesta);
       if (respuesta.images.transparent['256x256'] != null) {
@@ -23,7 +23,7 @@ const TarjetaJugador = (params) => {
       } else { 
         setImagen(respuesta.images.transparent['256x256'])
       }
-    })
+    
 
   }
   return (
