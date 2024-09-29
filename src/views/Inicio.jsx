@@ -1,17 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Inicio.css';
+import gif from '/img/IE.gif';
+import gif2 from '/img/IE2.gif';
+import gif3 from '/img/IE3.gif';
+import gif4 from '/img/IE4.gif';
 import logo from '/img/Logo.png';
 
 const Inicio = () =>{
 
 
     return(
-        <div>
+        <div className='contenedor'>
+            <div className='gifIzq'>
+                <img style={{height:'200px'}} src={gif2}></img>
+                <img style={{height:'200px'}} src={gif3}></img>
+            </div>
             <div>
                 <img src={logo}></img>
-            </div>
-            <div className='contenedorTitulo'>
+                <div className='contenedorTitulo'>
                 <button type="button" class="btnTitulo">
                 <strong>FANTASY CENTRAL</strong>
                 <div id="container-stars">
@@ -36,6 +43,12 @@ const Inicio = () =>{
                     </span>
                     <span class="BG"></span>
                 </button>
+            </div>
+            </div>
+           
+            <div className='gifDer'>
+                <img style={{height:'200px'}} src={gif}></img>
+                <img style={{height:'200px'}} src={gif4}></img>
             </div>
 
         </div>
