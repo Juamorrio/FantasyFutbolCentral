@@ -11,13 +11,17 @@ const Detalle = () => {
   const [puntosPromedio, setPuntosPromedio] = useState([]);
   const [imagen,setImagen] = useState([]);
   const [valorMercado, setValorMercado] = useState([]);
+  const [estadoSubida,setEstadoSubida] = useState('');
+  const [titularidad, setTitularidad] = useState('');
+  const [partitdosJugados, SetPartidosJugados] = useState([])
 
 
   useEffect( () => {
     getJugador();
     getValorMinMax();
-    
 }, [])
+
+
 
 const getJugador = async() =>{
   try {
@@ -34,6 +38,9 @@ const getJugador = async() =>{
     // Manejo de valores
     setValor(respuesta.marketValue.toLocaleString('es-ES'));
     setPuntosPromedio(respuesta.averagePoints.toString().substring(0, 5));
+
+      const valorTitularidad = respuesta.playerStats.map(element => element.stats.mins_played[0]);
+      SetPartidosJugados(valorTitularidad);
   } catch (error) {
     console.error('Error al obtener el jugador:', error.message); // Manejo de errores
   }
@@ -46,17 +53,32 @@ const getValorMinMax = async() =>{
     // Asegúrate de que 'valores' es un arreglo
     if (Array.isArray(valores)) {
       const nuevosValorMercado = valores.map(element => element.marketValue); // Extrae el marketValue
+
+      if( nuevosValorMercado[nuevosValorMercado.length-1]>=nuevosValorMercado[nuevosValorMercado.length-2]){
+        setEstadoSubida('¡Subiendo de valor!')
+      }else{
+        setEstadoSubida('¡Bajando de valor!')
+      }
+      
       nuevosValorMercado.sort((a, b) => a - b); // Ordena los valores
 
       // Formatear los valores
       const ValorMercadoFormateado = nuevosValorMercado.map(element => element.toLocaleString('es-ES'));
       setValorMercado(ValorMercadoFormateado);
+
+      
     } else {
       console.error('La respuesta no es un arreglo:', valores);
     }
   } catch (error) {
     console.error('Error al obtener el valor de mercado:', error.message); // Manejo de errores
   }
+}
+
+const getTitularidad = () => {
+  
+  //SetPartidosJugados(valorTitularidad.length());
+  //setTitularidad(valorTitularidad.filter(element => element>60).length());
 }
 
 const JugadorStatus = () => {
@@ -100,6 +122,8 @@ return mensajeEstado;
       )
         }
         <JugadorStatus/>
+        <h5>{estadoSubida}</h5>
+        <h5> {partitdosJugados.filter(element => element > 60).length} Titularidades de  {partitdosJugados.length} partidos posibles</h5>
       </div>
     </div>
   </div>

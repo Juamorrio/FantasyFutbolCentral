@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
+    "@splinetool/react-spline": "^4.0.0",
+    "@splinetool/runtime": "^1.9.28",
     "animate.css": "^4.1.1",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
