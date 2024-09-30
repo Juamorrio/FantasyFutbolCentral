@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { useParams } from 'react-router-dom';
 import { Col, Container, Input, InputGroup, InputGroupText, Row } from 'reactstrap';
 import { getPlayers } from '../api/FantasyEndPoints';
@@ -92,8 +91,6 @@ const Index = () => {
         }
           
         )}
-        <PaginationControl last={true} limit={limit} total={total} page={offset}
-        changePage={page=>goPage(page)}/>
       </Row>
     </Container>
   )
