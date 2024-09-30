@@ -3,7 +3,9 @@
 .back{
   background-image: linear-gradient(rgba(5,8,14,0.5), rgba(5,8,14,0.5)) ,url('../assets/IE.gif');
   background-size: cover; 
-  background-position: center; 
+  background-position: center;
+  height: 100vh;
+  overflow: scroll; 
 
 }
 
